@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before '/courses/*' do
+  before do
     authentication_required
   end
 
@@ -8,6 +8,8 @@ class CoursesController < ApplicationController
     erb :"/courses/index"
   end
 
-  
+  get '/courses/new' do
+    erb :"/courses/new"
+  end
 
 end
