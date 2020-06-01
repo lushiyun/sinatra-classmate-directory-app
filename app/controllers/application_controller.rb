@@ -28,15 +28,6 @@ class ApplicationController < Sinatra::Base
         redirect to "/"
       end
     end
-
-    def authorized_for_classmate
-      @classmate = current_user.classmates.find_by(id: params[:id])
-    end
-
-    def classmate_unauthorized
-      flash[:alerts] = ["Classmate not found"]
-      redirect to "/classmates"
-    end
-
   end
+  
 end
