@@ -1,0 +1,9 @@
+<h2><%= current_user.email %>'s courses:</h2>
+
+<ul>
+  <% @courses.each do |course| %>
+    <li>
+      <%= course.title %> <%= course.professor %> <%= course.teaching_assistant %>
+    </li>
+  <% end  %>
+</ul>
