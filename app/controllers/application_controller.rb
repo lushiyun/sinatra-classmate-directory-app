@@ -22,12 +22,12 @@ class ApplicationController < Sinatra::Base
       @user ||= User.find(session[:user_id]) if session[:user_id]
     end
   
-    def authentication_required
+    def login_required
       if !logged_in?
         flash[:alerts] = ["You must log in."]
         redirect to "/"
       end
     end
-  end
 
+  end
 end
