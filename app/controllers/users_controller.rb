@@ -1,10 +1,12 @@
 class UsersController < ApplicationController
 
   get '/login' do
+    reroute_if_logged_in
     erb :login
   end
 
   get '/signup' do
+    reroute_if_logged_in
     erb :signup
   end
 
@@ -35,4 +37,13 @@ class UsersController < ApplicationController
     session.clear
     redirect to "/"
   end
+
+  private
+  def reroute_if_logged_in
+    if logged_in?
+      flash[:alerts] = ["You already logged in"]
+      redirect to "/courses"
+    end
+  end
+
 end

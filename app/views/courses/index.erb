@@ -3,7 +3,9 @@
 <ul>
   <% @courses.each do |course| %>
     <li>
-      <%= course.title %> <%= course.professor %> <%= course.teaching_assistant %>
+      <a href="/courses/<%= course.id %>"> <%= course.title %> <%= course.professor %> <%= course.teaching_assistant %> </a>
     </li>
   <% end  %>
 </ul>
+
+<a href="/courses/new">Add</a>

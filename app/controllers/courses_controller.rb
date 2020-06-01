@@ -13,12 +13,13 @@ class CoursesController < ApplicationController
   end
 
   post '/courses' do
-    course = Course.new(params)
-    if course.valid?
-      course.user = current_user
-      course.save
+    @course = Course.new(params)
+    if @course.valid?
+      @course.user = current_user
+      @course.save
+      erb :"courses/show"
     else 
-      flash[:alerts] = course.errors.full_messages
+      flash[:alerts] = @course.errors.full_messages
       redirect to "/courses/new"
     end
   end
@@ -41,7 +42,7 @@ class CoursesController < ApplicationController
 
   patch '/courses/:id' do
     if authorized?
-      if @course.update(params)
+      if @course.update(params[:course])
         redirect to "/courses/#{@course.id}"
       else 
         flash[:alerts] = course.errors.full_messages
