@@ -5,5 +5,6 @@ if ActiveRecord::Base.connection.migration_context.needs_migration?
 end
 
 use Rack::MethodOverride
-# Mount other controllers with use
+
+use UsersController
 run ApplicationController

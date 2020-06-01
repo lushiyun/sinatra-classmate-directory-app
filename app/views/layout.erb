@@ -14,7 +14,17 @@
     <link rel="stylesheet" href="/stylesheets/main.css" />
   </head>
   <body>
+    
     <div class="wrapper">
+      <nav>
+        <a href="/">Home</a>
+      </nav>
+
+      <% if !!flash[:alerts] %>
+        <% flash[:alerts].each do |alert| %>
+          <p><%= alert %></p>
+        <% end %>
+      <% end  %> 
 
         <%= yield %>
 
