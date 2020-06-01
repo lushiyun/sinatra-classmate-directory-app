@@ -9,7 +9,7 @@ class ApplicationController < Sinatra::Base
     set :views, 'app/views'
   end
 
-  get "/" do
+  get '/' do
     redirect to "/login"
   end
 
@@ -27,6 +27,15 @@ class ApplicationController < Sinatra::Base
         flash[:alerts] = ["You must log in."]
         redirect to "/"
       end
+    end
+
+    def authorized_for_course
+      @course = current_user.courses.find_by(id: params[:id])
+    end
+    
+    def course_unauthorized
+      flash[:alerts] = ["Course not found"]
+      redirect to "/courses"
     end
 
   end

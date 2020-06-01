@@ -18,26 +18,24 @@ class CoursesController < ApplicationController
       course.user = current_user
       course.save
     else 
-      flash[:alerts] =  course.errors.full_messages
+      flash[:alerts] = course.errors.full_messages
       redirect to "/courses/new"
     end
   end
 
   get '/courses/:id' do
-    if @course = current_user.courses.find_by(id: params[:id])
+    if authorized_for_course
       erb :"courses/show"
     else 
-      flash[:alerts] = ["Can't find the course"]
-      redirect to "/courses"
+      course_unauthorized
     end
   end
 
   get '/courses/:id/edit' do
-    if @course = current_user.courses.find_by(id: params[:id])
+    if authorized_for_course
       erb :"courses/edit"
     else 
-      flash[:alerts] = ["Can't find the course"]
-      redirect to "/courses"
+      course_unauthorized
     end 
   end
 
