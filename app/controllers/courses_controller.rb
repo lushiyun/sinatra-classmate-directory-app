@@ -5,11 +5,11 @@ class CoursesController < ApplicationController
 
   get '/courses' do
     @courses = current_user.courses
-    erb :"/courses/index"
+    erb :"courses/index"
   end
 
   get '/courses/new' do
-    erb :"/courses/new"
+    erb :"courses/new"
   end
 
   post '/courses' do
@@ -24,34 +24,51 @@ class CoursesController < ApplicationController
   end
 
   get '/courses/:id' do
-    if authorized_for_course
+    if authorized?
       erb :"courses/show"
     else 
-      course_unauthorized
+      reroute
     end
   end
 
   get '/courses/:id/edit' do
-    if authorized_for_course
+    if authorized?
       erb :"courses/edit"
     else 
-      course_unauthorized
+      reroute
     end 
   end
 
   patch '/courses/:id' do
-    course = current_user.courses.find_by(id: params[:id])
-    if course.update(params)
-      redirect to "/courses/#{course.id}"
+    if authorized?
+      if @course.update(params)
+        redirect to "/courses/#{@course.id}"
+      else 
+        flash[:alerts] = course.errors.full_messages
+        redirect to "/courses/#{course.id}/edit"
+      end
     else 
-      flash[:alerts] = course.errors.full_messages
-      redirect to "/courses/#{course.id}/edit"
+      reroute
     end
   end
 
   delete '/courses/:id' do
-    course = Course.find_by(id: params[:id])
-    current_user.courses.destroy(course)
+    if authorized?
+      current_user.courses.destroy(@course)
+    else 
+      reroute
+    end
+  end
+
+  private
+
+  def authorized?
+    @course = current_user.courses.find_by(id: params[:id])
+  end
+  
+  def reroute
+    flash[:alerts] = ["You don't have permission"]
+    redirect to "/courses"
   end
 
 end

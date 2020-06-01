@@ -29,15 +29,6 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def authorized_for_course
-      @course = current_user.courses.find_by(id: params[:id])
-    end
-    
-    def course_unauthorized
-      flash[:alerts] = ["Course not found"]
-      redirect to "/courses"
-    end
-
     def authorized_for_classmate
       @classmate = current_user.classmates.find_by(id: params[:id])
     end
