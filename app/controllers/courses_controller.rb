@@ -56,6 +56,7 @@ class CoursesController < ApplicationController
   delete '/courses/:id' do
     if authorized?
       current_user.courses.destroy(@course)
+      redirect to "/courses"
     else 
       reroute
     end

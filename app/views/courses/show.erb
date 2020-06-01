@@ -3,3 +3,8 @@
 <p>Teaching Assistant: <%= @course.teaching_assistant %></p>
 
 <a href="/courses/<%= @course.id %>/edit">Edit</a> <a href="/courses">Index</a>
+
+<form action="/courses/<%= @course.id %>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete">
+</form>
