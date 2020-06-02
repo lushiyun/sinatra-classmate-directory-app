@@ -2,9 +2,31 @@
 <p>Professor: <%= @course.professor %></p>
 <p>Teaching Assistant: <%= @course.teaching_assistant %></p>
 
-<a href="/courses/<%= @course.id %>/edit">Edit</a> <a href="/courses">Index</a>
+<h4>Classmates</h4>
 
-<form action="/courses/<%= @course.id %>" method="post">
-  <input type="hidden" id="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete">
+<ul>
+  <% @course.classmates.each do |classmate| %>
+    <p>
+      <%= classmate.name %>
+      <%= classmate.birthday %>
+    </p>
+  <% end %> 
+</ul>
+
+<br>
+
+<h4>Add new classmates</h4>
+
+<form action="/courses/<%= @course.id %>/classmates" method="post">
+
+  <label for="name">Classmate name: </label>
+  <input type="text" name="name">
+  <label for="birthday">Classmate birthday: </label>
+  <input type="date" name="birthday">
+  <input type="submit" value="Add Classmate">
+
 </form>
+
+<br>
+
+<a href="/courses">Index</a>

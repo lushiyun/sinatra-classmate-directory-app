@@ -1,0 +1,9 @@
+<h3><%= @classmate.name %></h3>
+<p>Birthday: <%= @classmate.birthday %></p>
+
+<a href="/classmates/<%= @classmate.id %>/edit">Edit</a> <a href="/classmates">Index</a>
+
+<form action="/classmates/<%= @classmate.id %>" method="post">
+  <input type="hidden" id="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete">
+</form>

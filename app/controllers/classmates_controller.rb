@@ -8,50 +8,68 @@ class ClassmatesController < ApplicationController
     erb :"/classmates/index"
   end
 
-  get '/classmates/new' do
-    erb :"/classmates/new"
-  end
+  # get '/classmates/new' do
+  #   query = params.map{|key, value| "#{key}=#{value}"}.join("&")
+  #   erb :"/classmates/new?#{query}"
+  # end
 
-  # TODO
   post '/classmates' do
-    classmate = Classmate.new(params)
-    if classmate.valid?
-      classmate.user = current_user
-      classmate.save
-    else 
-      flash[:alerts] = classmate.errors.full_messages
-      redirect to "/classmates/new"
+    @course = Course.find_by(id: params[:course_id])
+    @classmate = @course.classmates.find_or_create_by(name: params[:name], birthday: params[:birthday])
+    unless @classmate.valid?
+      flash[:alerts] = @classmate.errors.full_messages
     end
+    @classmate.user = current_user
+    redirect to "/courses/#{@course.id}"
   end
 
   get '/classmates/:id' do
-    if authorized_for_classmate
+    if authorized?
       erb :"classmates/show"
     else 
-      classmate_unauthorized
+      reroute
     end
   end
 
   get '/classmates/:id/edit' do
-    if authorized_for_classmate
+    if authorized?
       erb :"classmates/edit"
     else 
-      classmate_unauthorized
+      reroute
     end 
   end
 
   patch '/classmates/:id' do
-    classmate = current_user.classmates.find_by(id: params[:id])
-    if classmate.update(params)
-      redirect to "/classmates/#{classmate.id}"
+    if authorized?
+      if @classmate.update(params[:classmate])
+        redirect to "/courses/#{@classmate.id}"
+      else 
+        flash[:alerts] = classmate.errors.full_messages
+        redirect to "/courses/#{classmate.id}/edit"
+      end
     else 
-      flash[:alerts] = classmate.errors.full_messages
-      redirect to "/classmates/#{classmate.id}/edit"
+      reroute
     end
   end
 
   delete '/classmates/:id' do
-    classmate = Classmate.find_by(id: params[:id])
-    current_user.classmates.destroy(classmate)
+    if authorized?
+      current_user.classmates.destroy(@classmate)
+      redirect to "/classmates"
+    else 
+      reroute
+    end
   end
+
+  private
+
+  def authorized?
+    @classmate = current_user.classmates.find_by(id: params[:id])
+  end
+  
+  def reroute
+    flash[:alerts] = ["You don't have permission"]
+    redirect to "/classmates"
+  end
+
 end

@@ -1,0 +1,10 @@
+<ul>
+  <li>
+    <% @classmates.each do |classmate| %>
+      <%= classmate.name %>
+      <%= classmate.birthday %>
+    <% end %>
+  </li>
+</ul>
+
+<a href="/classmates/new">Add</a>

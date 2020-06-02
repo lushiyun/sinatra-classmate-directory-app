@@ -3,9 +3,14 @@
 <ul>
   <% @courses.each do |course| %>
     <li>
-      <a href="/courses/<%= course.id %>"> <%= course.title %> <%= course.professor %> <%= course.teaching_assistant %> </a>
+      <a href="/courses/<%= course.id %>"><%= course.title %></a>
+      <a href="/courses/<%= course.id %>/edit">Edit</a>
+      <form action="/courses/<%= course.id %>" method="post">
+        <input type="hidden" id="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+      </form>
     </li>
-  <% end  %>
+  <% end %>
 </ul>
 
 <a href="/courses/new">Add</a>

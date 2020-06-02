@@ -24,53 +24,53 @@ class CoursesController < ApplicationController
     end
   end
 
+  post '/courses/:id/classmates' do 
+    permission_required
+
+    @classmate = Classmate.find_or_create_by(name: params[:name], birthday: params[:birthday])
+
+    flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
+
+    @course.classmates << @classmate unless @course.classmates.include?(@classmate)
+
+    @classmate.user = current_user
+    
+    redirect to "/courses/#{@course.id}"
+  end
+
   get '/courses/:id' do
-    if authorized?
-      erb :"courses/show"
-    else 
-      reroute
-    end
+    permission_required
+    erb :"/courses/show"
   end
 
   get '/courses/:id/edit' do
-    if authorized?
-      erb :"courses/edit"
-    else 
-      reroute
-    end 
+    permission_required
+    erb :"/courses/edit"
   end
 
   patch '/courses/:id' do
-    if authorized?
-      if @course.update(params[:course])
-        redirect to "/courses/#{@course.id}"
-      else 
-        flash[:alerts] = course.errors.full_messages
-        redirect to "/courses/#{course.id}/edit"
-      end
+    permission_required
+    if @course.update(params[:course])
+      redirect to "/courses/#{@course.id}"
     else 
-      reroute
+      flash[:alerts] = course.errors.full_messages
+      redirect to "/courses/#{course.id}/edit"
     end
   end
 
   delete '/courses/:id' do
-    if authorized?
-      current_user.courses.destroy(@course)
-      redirect to "/courses"
-    else 
-      reroute
-    end
+    permission_required
+    current_user.courses.destroy(@course)
+    redirect to "/courses"
   end
 
   private
 
-  def authorized?
-    @course = current_user.courses.find_by(id: params[:id])
-  end
-  
-  def reroute
-    flash[:alerts] = ["You don't have permission"]
-    redirect to "/courses"
+  def permission_required
+    unless @course = current_user.courses.find_by(id: params[:id])
+      flash[:alerts] = ["You don't have permission"]
+      redirect to "/courses"
+    end 
   end
 
 end

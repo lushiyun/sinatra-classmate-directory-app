@@ -8,4 +8,5 @@ use Rack::MethodOverride
 
 use UsersController
 use CoursesController
+use ClassmatesController
 run ApplicationController
