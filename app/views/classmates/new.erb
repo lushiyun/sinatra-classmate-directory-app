@@ -1,13 +1,32 @@
 <form action="/classmates" method="post">
 
   <p>
-    <label for="name">Name:</label>
-    <input type="text" name="name" />
+    <label for="classmate[name]">Name: </label>
+    <input type="text" name="classmate[name]" />
   </p>
 
   <p>
-    <label for="birthday">Birthday:</label>
-    <input type="date" name="birthday" />
+    <label for="classmate[birthday]">Birthday: </label>
+    <input type="date" name="classmate[birthday]" />
+  </p>
+
+  <p>
+    <label for="classmate[course_ids][]">Select from your existing courses:</label>
+    <% @courses.each do |course| %>
+      <input type="checkbox" name="classmate[course_ids][]" value="<%= course.id %>"><%= course.title %><br>
+    <% end %>
+  </p>
+
+  <p>
+    Add a new course together:<br>
+    <label for="course[title]">Name: </label>
+    <input type="text" name="course[title]">
+
+    <label for="course[professor]">Professor: </label>
+    <input type="text" name="course[professor]">
+
+    <label for="course[teaching_assistant]">Teaching Assistant: </label>
+    <input type="text" name="course[teaching_assistant]">
   </p>
 
   <p>

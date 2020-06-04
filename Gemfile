@@ -9,6 +9,7 @@ gem 'require_all'
 gem 'sqlite3'
 gem 'puma'
 gem 'bcrypt'
+gem 'faker'
 
 group :development do
   gem 'tux'

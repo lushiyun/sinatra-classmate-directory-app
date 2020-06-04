@@ -7,7 +7,7 @@
 <ul>
   <% @course.classmates.each do |classmate| %>
     <p>
-      <%= classmate.name %>
+      <a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a>
       <%= classmate.birthday %>
     </p>
   <% end %> 

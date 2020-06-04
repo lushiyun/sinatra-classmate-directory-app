@@ -1,10 +1,9 @@
 <ul>
-  <li>
     <% @classmates.each do |classmate| %>
-      <%= classmate.name %>
-      <%= classmate.birthday %>
-    <% end %>
-  </li>
+    <li>
+      <a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a>
+    </li>
+    <% end %> 
 </ul>
 
 <a href="/classmates/new">Add</a>

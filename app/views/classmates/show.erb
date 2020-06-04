@@ -1,6 +1,16 @@
 <h3><%= @classmate.name %></h3>
 <p>Birthday: <%= @classmate.birthday %></p>
 
+<h4>Courses you have together:</h4>
+
+<ul>
+  <% @classmate.courses.each do |course| %>
+    <li><a href="/courses/<%= course.id %>"><%= course.title %></a></li> 
+  <% end %>
+</ul>
+
+  <br>
+
 <a href="/classmates/<%= @classmate.id %>/edit">Edit</a> <a href="/classmates">Index</a>
 
 <form action="/classmates/<%= @classmate.id %>" method="post">
