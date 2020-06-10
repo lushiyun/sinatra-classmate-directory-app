@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_01_173503) do
+ActiveRecord::Schema.define(version: 2020_06_08_231625) do
 
   create_table "classmate_courses", force: :cascade do |t|
     t.integer "classmate_id"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_06_01_173503) do
     t.date "birthday"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email"
     t.index ["user_id"], name: "index_classmates_on_user_id"
   end
 
@@ -43,6 +44,8 @@ ActiveRecord::Schema.define(version: 2020_06_01_173503) do
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "first_name"
+    t.string "last_name"
   end
 
 end

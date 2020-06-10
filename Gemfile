@@ -9,10 +9,11 @@ gem 'require_all'
 gem 'sqlite3'
 gem 'puma'
 gem 'bcrypt'
-gem 'faker'
+gem 'dotenv'
 
 group :development do
   gem 'tux'
   gem 'pry'
   gem 'shotgun'
+  gem 'faker'
 end 

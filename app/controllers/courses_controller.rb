@@ -13,10 +13,8 @@ class CoursesController < ApplicationController
   end
 
   post '/courses' do
-    @course = Course.new(params)
+    @course = current_user.courses.create(params)
     if @course.valid?
-      @course.user = current_user
-      @course.save
       erb :"courses/show"
     else 
       flash[:alerts] = @course.errors.full_messages
@@ -27,13 +25,11 @@ class CoursesController < ApplicationController
   post '/courses/:id/classmates' do 
     permission_required
 
-    @classmate = Classmate.find_or_create_by(name: params[:name], birthday: params[:birthday])
+    @classmate = current_user.find_or_create_by(name: params[:name], birthday: params[:birthday])
 
     flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
 
-    @course.classmates << @classmate unless @course.classmates.include?(@classmate)
-
-    @classmate.user = current_user
+    ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
     
     redirect to "/courses/#{@course.id}"
   end

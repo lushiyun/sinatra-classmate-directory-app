@@ -14,7 +14,7 @@ class ClassmatesController < ApplicationController
   end
 
   post '/classmates' do
-    @classmate = Classmate.create(params[:classmate])
+    @classmate = current_user.classmates.create(params[:classmate])
     create_or_update_classmate
   end
 
@@ -56,12 +56,10 @@ class ClassmatesController < ApplicationController
     end
 
     unless params[:course][:title].empty?
-      course = Course.create(params[:course])
-      course.user = current_user
-      @classmate.courses << course
+      course = current_user.courses.find_or_create_by(params[:course])
+      ClassmateCourse.create(course_id: course.id, classmate_id: @classmate.id)
     end
-
-    @classmate.user = current_user
+    
     redirect to "/classmates/#{@classmate.id}"
   end
 

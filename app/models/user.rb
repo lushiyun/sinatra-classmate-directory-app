@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  validates :email, :password, presence: true
+  validates :email, presence: true
   validates :email, uniqueness: { case_sensitive: false }
   validates :email, format: { with: /\A\w+@\w+.[a-z]+\z/i, message: "address invalid" }
 
@@ -9,6 +9,6 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :courses
-  has_many :classmates, :through => :courses
+  has_many :classmates
   
 end
