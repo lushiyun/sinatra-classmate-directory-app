@@ -4,48 +4,40 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../public/node_modules/normalize.css/normalize.css" type="text/css">
-    <link rel="stylesheet" href="../../public/stylesheets/main.css" type="text/css">
+    <link rel="stylesheet" href="/node_modules/normalize.css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Source+Sans+Pro:wght@400;700&display=swap" rel="stylesheet">
     <title>ClassmateDirectory</title>
   </head>
   <body>
     <header>
+      <div class="logo">
+        <a href="/">Class Directory</a>
+      </div>
       <nav>
-        <h1 class="logo">
-          <a href="#">Class Directory</a>
-        </h1>
         <% if logged_in? %>
           <ul class="logged-in-nav">
-            <li><a href="#">Courses</a></li>
-            <li><a href="#">Classmates</a></li>
-            <li><a href="#">Log Out</a></li>
+            <li><a href="/courses">Courses</a></li>
+            <li><a href="/classmates">Classmates</a></li>
+            <li><a href="/logout">Log Out</a></li>
           </ul>
         <% else %>
           <ul class="logged-out-nav">
-            <li><a href="">Log In</a></li>
-            <li><a href="#">Sign Up</a></li>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/signup">Sign Up</a></li>
           </ul>
         <% end %>
       </nav>
     </header>
-
-    <section class="alert">
-      <% if !!flash[:alerts] %>
-        <% flash[:alerts].each do |alert| %>
-          <p><%= alert %></p>
-        <% end %>
-      <% end  %> 
-    </section>
 
     <%= yield %>
 
     <footer>
       <p id="line"></p>
       <p>About the Project</p>
-      <a href="#"><img src="../../public/images/GitHub-Mark-64px.png" alt="Link to source code on Github"></a>
-      <a href="#"><img src="../../public/images/Monogram.png" alt="Link to blog post on Medium"></a>
-      <a href="#"><img src="../../public/images/yt_icon_mono_light.png" alt="Link to demo video on Youtube"></a>
+      <a href="#"><img src="images/GitHub-Mark-64px.png" alt="Link to source code on Github"></a>
+      <a href="#"><img src="images/Monogram.png" alt="Link to blog post on Medium"></a>
+      <a href="#"><img src="images/yt_icon_mono_light.png" alt="Link to demo video on Youtube"></a>
     </footer>
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>

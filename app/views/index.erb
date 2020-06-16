@@ -4,3 +4,11 @@
 <div class="btn-full">
   <p>Watch Demo</p>
 </div>
+
+<section class="alert">
+  <% if !!flash[:alerts] %>
+    <% flash[:alerts].each do |alert| %>
+      <p><%= alert %></p>
+    <% end %>
+  <% end  %> 
+</section>
