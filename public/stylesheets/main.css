@@ -10,7 +10,8 @@
 
 html,
 body {
-  background: url(../images/joanna-kosinska-1_CMoFsPfso-unsplash.jpg) no-repeat cover left top fixed;
+  background: url(../images/joanna-kosinska-1_CMoFsPfso-unsplash.jpg) no-repeat left top fixed;
+  background-size: cover;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -33,36 +34,157 @@ body {
 
 a:link,
 a:visited {
-    color: #E6AF01;
-    text-decoration: none;
-    padding-bottom: 1px;
-    border-bottom: 1px solid #E6AF01;
-    -webkit-transition: border-bottom 0.2s, color 0.2s;
-    transition: border-bottom 0.2s, color 0.2s;
+  text-decoration: none;
+  color: #000000;
 }
 
 a:hover,
 a:active {
-    color: #000000;
-    border-bottom: 1px solid transparent;
+  text-decoration: none;
+  color: #000000;
 }
 
-/* Header */
+/* BUTTONS */
 
-header {
-  width: 100%;
-  height: 65px;
-  background-color: #ffffff;
+.btn:link,
+.btn:visited,
+input[type=submit] {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  text-decoration: none;
+  border-radius: 15px;
+  transition: background-color 0.2s, border 0.2s, color 0.2s;
 }
 
-.logo a {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 24px;
+.btn-ghost:link,
+.btn-ghost:visited {
+  border: 1px solid #000000;
+  color: #000000;
+}
+
+.btn-ghost:hover,
+.btn-ghost:active {
+  border: 1px solid #E6AF01;
+  color: #E6AF01;
   font-weight: bold;
 }
 
-.logged-in-nav,
-.logged-out-nav {
+.btn-full:link,
+.btn-full:visited,
+input[type=submit] {
+  background-color: #808080;
+  border: 1px solid #808080;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.btn-full:hover,
+.btn-full:active,
+input[type=submit]:hover
+input[type=submit]:active {
+  background-color: #000000;
+  border: 1px solid #000000;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+/* HEADINGS */
+
+h1 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+/* SECTION */
+
+section {
+  position: absolute;
+  top: 35%;
+  left: 60%;
+  transform: translate(-65%, -40%);
+  width: auto;
+}
+
+/* Headers */
+
+header,
+footer {
+  background-color: #ffffff;
+  padding: 0.75rem 0.75rem;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+nav {
+  float: right;
   list-style: none;
+}
+
+nav li {
   display: inline-block;
+  margin-left: 0.25rem;
+}
+
+/* INTRO */
+
+.intro h1 {
+  margin-bottom: 0;
+}
+
+.intro h3 {
+  margin-bottom: 1.25rem;
+}
+
+.intro p {
+  font-size: 1.2rem;
+  line-height: 160%;
+  margin-bottom: 1rem;
+}
+
+/* FOOTER */
+
+footer {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  display: flex;
+}
+
+footer > div {
+  margin-right: 0.75rem;
+}
+
+.line {
+  width: 15vw;
+  border-bottom: 1.5px solid #000000;
+  margin-bottom: 0.9rem;
+}
+
+footer .text {
+  font-size: 1rem;
+  line-height: 1.8rem;
+}
+
+footer a:link
+footer a:visited {
+  transition: color 0.2s;
+}
+
+footer a:hover,
+footer a:active {
+  color: #E6AF01;
+}
+
+ion-icon {
+  margin-right: 0.25rem;
+  font-size: 1.8rem;
 }
