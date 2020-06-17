@@ -1,16 +1,30 @@
-<h2><%= current_user.email %>'s courses:</h2>
+<h3>Course Listing</h3>
 
-<ul>
-  <% @courses.each do |course| %>
-    <li>
-      <a href="/courses/<%= course.id %>"><%= course.title %></a>
-      <a href="/courses/<%= course.id %>/edit">Edit</a>
-      <form action="/courses/<%= course.id %>" method="post">
-        <input type="hidden" id="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete">
-      </form>
-    </li>
-  <% end %>
-</ul>
+<section class="courses">
 
-<a href="/courses/new">Add</a>
+  <a href="/courses/new">Add</a>
+
+  <table>
+    <tr>
+      <th>Title</th>
+      <th colspan="2"></th>
+    </tr>
+
+    <% @courses.each do |course| %>
+      <tr>
+        <td>
+          <a href="/courses/<%= course.id %>"><%= course.title %></a>
+        </td>
+        <td>
+          <a href="/courses/<%= course.id %>/edit"><ion-icon name="create"></ion-icon></a>
+        </td>
+        <td>
+          <form action="/courses/<%= course.id %>" method="post">
+            <input type="hidden" id="hidden" name="_method" value="delete">
+            <button type="submit"><ion-icon name="trash"></ion-icon></button>
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</section>

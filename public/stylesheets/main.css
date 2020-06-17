@@ -66,7 +66,6 @@ input[type=submit] {
 .btn-ghost:active {
   border: 1px solid #E6AF01;
   color: #E6AF01;
-  font-weight: bold;
 }
 
 .btn-full:link,
@@ -109,21 +108,28 @@ section {
   width: auto;
 }
 
-/* Headers */
+/* Header */
 
 header,
 footer {
   background-color: #ffffff;
   padding: 0.75rem 0.75rem;
+  position: fixed;
+  width: 100%;
+}
+
+header {
+  top: 0;
 }
 
 .logo {
   font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
 }
 
 nav {
+  font-weight: bold;
   float: right;
   list-style: none;
 }
@@ -131,6 +137,20 @@ nav {
 nav li {
   display: inline-block;
   margin-left: 0.25rem;
+}
+
+nav a:link,
+nav a:visited {
+  margin: 0 0.5rem;
+  padding-bottom: 1px;
+  border-bottom: 1.5px solid transparent;
+  transition: border-bottom 0.2s, color 0.2s;
+}
+
+nav a:hover,
+nav a:active {
+  color: #E6AF01;
+  border-bottom: 1px solid #E6AF01;
 }
 
 /* INTRO */
@@ -152,8 +172,6 @@ nav li {
 /* FOOTER */
 
 footer {
-  width: 100%;
-  position: fixed;
   bottom: 0;
   display: flex;
 }
@@ -169,7 +187,7 @@ footer > div {
 }
 
 footer .text {
-  font-size: 1rem;
+  font-weight: bold;
   line-height: 1.8rem;
 }
 
@@ -197,7 +215,8 @@ section.signup {
   margin: auto;
 }
 
-form {
+.login form,
+.signup form {
   position: relative;
   background-color: #ffffff;
   max-width: 360px;
@@ -206,7 +225,8 @@ form {
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
 }
 
-form input {
+.login form input,
+.signup form input {
   outline: 0;
   background-color: #f2f2f2;
   width: 100%;
@@ -214,7 +234,6 @@ form input {
   border: 0;
   margin: 0 0 15px;
   box-sizing: border-box;
-  font-size: 1rem;
 }
 
 section .alert {
@@ -229,3 +248,14 @@ section .alert {
   display: inline-block;
   margin-right: 0.75rem;
 }
+
+/* INDEX TABLE */
+
+tr {
+  border-radius: 3px;
+  padding: 25px 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 25px;
+}
+
