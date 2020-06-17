@@ -1,37 +1,36 @@
-<h1>Classmate Directory</h1>
-<h4>Collect classmate contacts for better collaboration</h4>
-
-<br><br>
-
-<form action="/signup" method="post">
-
-  <p>
-    <label for="first_name">First Name:</label>
-    <input type="text" name="first_name" />
-  </p>
-
-  <p>
-    <label for="last_name">Last Name:</label>
-    <input type="text" name="last_name" />
-  </p>
-
-  <p>
-    <label for="email">Email:</label>
-    <input type="email" name="email" />
-  </p>
-
-  <p>
-    <label for="password">Password:</label>
-    <input type="password" name="password" />
-  </p>
-
-  <p>
-    <label for="password_confirmation">Password Confirmation:</label>
-    <input type="password" name="password_confirmation" />
-  </p>
-
-  <p>
-    <input type="submit" value="Sign up">
-  </p>
+<section class="signup">
+  <form action="/signup" method="post">
   
-</form>
+    <% if !!flash[:alerts] %>
+      <div class="alert">
+        <ul>
+          <% flash[:alerts].each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <label for="email">Email:</label> <br>
+      <input type="email" name="email" />
+    </div>
+
+    <div>
+      <label for="password">Password:</label> <br>
+      <input type="password" name="password" />
+    </div>
+
+    <div>
+      <label for="password_confirmation">Password Confirmation:</label> <br>
+      <input type="password" name="password_confirmation" />
+    </div>
+
+    <br>
+
+    <div>
+      <input type="submit" value="Sign up" class="btn btn-full">
+    </div>
+  
+  </form>
+</section>

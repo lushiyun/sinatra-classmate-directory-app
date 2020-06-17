@@ -75,7 +75,6 @@ input[type=submit] {
   background-color: #808080;
   border: 1px solid #808080;
   color: #ffffff;
-  font-size: 1rem;
 }
 
 .btn-full:hover,
@@ -85,7 +84,7 @@ input[type=submit]:active {
   background-color: #000000;
   border: 1px solid #000000;
   color: #ffffff;
-  font-size: 1rem;
+  cursor: pointer;
 }
 
 /* HEADINGS */
@@ -187,4 +186,46 @@ footer a:active {
 ion-icon {
   margin-right: 0.25rem;
   font-size: 1.8rem;
+}
+
+/* LOGIN AND SIGNUP */
+
+section.login,
+section.signup {
+  width: 360px;
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+form {
+  position: relative;
+  background-color: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
+}
+
+form input {
+  outline: 0;
+  background-color: #f2f2f2;
+  width: 100%;
+  padding-top: 0.5rem;
+  border: 0;
+  margin: 0 0 15px;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+section .alert {
+  padding: 0.75rem;
+  background-color: #f44336;
+  color: #ffffff;
+  margin-bottom:15px;
+}
+
+.alert li {
+  list-style: none;
+  display: inline-block;
+  margin-right: 0.75rem;
 }

@@ -1,25 +1,31 @@
-<form action="/login" method="post">
+<section class="login">
+  <form action="/login" method="post">
 
-  <p>
-    <label for="email">Email:</label>
-    <input type="email" name="email" />
-  </p>
-
-  <p>
-    <label for="password">Password:</label>
-    <input type="password" name="password" />
-  </p>
-
-  <p>
-    <input type="submit">
-  </p>
-  
-</form>
-
-<section class="alert">
-  <% if !!flash[:alerts] %>
-    <% flash[:alerts].each do |alert| %>
-      <p><%= alert %></p>
+    <% if !!flash[:alerts] %>
+      <div class="alert">
+        <ul>
+          <% flash[:alerts].each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  <% end  %> 
+
+    <div>
+      <label for="email">Email:</label> <br>
+      <input type="email" name="email" />
+    </div>
+
+    <div>
+      <label for="password">Password:</label> <br>
+      <input type="password" name="password" />
+    </div>
+
+    <br>
+
+    <div>
+      <input type="submit" value="Log in" class="btn btn-full">
+    </div>
+  
+  </form>
 </section>
