@@ -1,32 +1,51 @@
-<h3><%= @course.title %></h3>
-<p>Professor: <%= @course.professor %></p>
-<p>Teaching Assistant: <%= @course.teaching_assistant %></p>
+<main>
+  <h3><%= @course.title %></h3>
+  
+  <form class="new" action="/courses/<%= @course.id %>/classmates" method="POST">
+    <% if !!flash[:alerts] %>
+      <div class="alert">
+        <ul>
+          <% flash[:alerts].each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <span>
+        <input type="text" name="classmate[name]" placeholder="Name">
+      </span>
+      <span>
+        <input type="date" name="classmate[birthday]" placeholder="Birthday">
+      </span>
+      <span>
+        <input type="email" name="classmate[email]" placeholder="Email">
+      </span>
+      <span>
+        <input type="submit" value="Add Course" class="btn btn-full">
+      </span>
+    </div> 
+  </form>
 
-<h4>Classmates</h4>
+  <ul>
+    <% @course.classmates.reverse.each do |classmate| %>
+      <li>
+        <span><%= classmate.name %></a></span>
+        <span><%= classmate.birthday %></span>
+        <span><%= classmates.email %></span>
+         <span>
+            <a href="/courses/<%= course.id %>/edit"><ion-icon name="create"></ion-icon></a>
+          </span>
+          <span>
+            <form class="delete" action="/courses/<%= course.id %>" method="post">
+              <input type="hidden" id="hidden" name="_method" value="delete">
+              <button type="submit"><ion-icon name="trash"></ion-icon></button>
+            </form>
+          </span>
+      </li>
+    <% end %> 
+  </ul>
 
-<ul>
-  <% @course.classmates.each do |classmate| %>
-    <p>
-      <a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a>
-      <%= classmate.birthday %>
-    </p>
-  <% end %> 
-</ul>
-
-<br>
-
-<h4>Add new classmates</h4>
-
-<form action="/courses/<%= @course.id %>/classmates" method="post">
-
-  <label for="name">Classmate name: </label>
-  <input type="text" name="name">
-  <label for="birthday">Classmate birthday: </label>
-  <input type="date" name="birthday">
-  <input type="submit" value="Add Classmate">
-
-</form>
-
-<br>
+</main>
 
 <a href="/courses">Index</a>

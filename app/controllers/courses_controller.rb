@@ -9,6 +9,7 @@ class CoursesController < ApplicationController
   end
 
   post '/courses' do
+    #bug: error message is always "You don't have permission"
     @course = current_user.courses.build(params)
     if @course.save
       redirect to '/courses'
@@ -18,17 +19,17 @@ class CoursesController < ApplicationController
     end
   end
 
-  # post '/courses/:id/classmates' do 
-  #   permission_required
+  post '/courses/:id/classmates' do 
+    permission_required
 
-  #   @classmate = current_user.find_or_create_by(name: params[:name], birthday: params[:birthday])
+    @classmate = current_user.find_or_create_by(params[:classmate])
 
-  #   flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
+    flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
 
-  #   ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
+    ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
     
-  #   redirect to "/courses/#{@course.id}"
-  # end
+    redirect to "/courses/#{@course.id}"
+  end
 
   get '/courses/:id' do
     permission_required
