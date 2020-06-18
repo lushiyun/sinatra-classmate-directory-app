@@ -1,30 +1,43 @@
-<h3>Course Listing</h3>
-
-<section class="courses">
-
-  <a href="/courses/new">Add</a>
-
-  <table>
-    <tr>
-      <th>Title</th>
-      <th colspan="2"></th>
-    </tr>
-
-    <% @courses.each do |course| %>
-      <tr>
-        <td>
-          <a href="/courses/<%= course.id %>"><%= course.title %></a>
-        </td>
-        <td>
-          <a href="/courses/<%= course.id %>/edit"><ion-icon name="create"></ion-icon></a>
-        </td>
-        <td>
-          <form action="/courses/<%= course.id %>" method="post">
-            <input type="hidden" id="hidden" name="_method" value="delete">
-            <button type="submit"><ion-icon name="trash"></ion-icon></button>
-          </form>
-        </td>
-      </tr>
+<main>
+  <form class="new" action="/courses" method="POST">
+    <% if !!flash[:alerts] %>
+      <div class="alert">
+        <ul>
+          <% flash[:alerts].each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
-  </table>
-</section>
+    <div>
+      <span>
+        <input type="text" name="title" placeholder="Course Title">
+      </span>
+      <span>
+        <input type="submit" value="Add Course" class="btn btn-full">
+      </span>
+    </div> 
+  </form>
+
+  <div class="index">
+    <ul>
+      <% @courses.reverse.each do |course| %>
+        <li>
+          <span>
+            <a id="course-title" href="/courses/<%= course.id %>"><%= course.title %></a>
+          </span>
+          <span>
+            <a href="/courses/<%= course.id %>/edit"><ion-icon name="create"></ion-icon></a>
+          </span>
+          <span>
+            <form class="delete" action="/courses/<%= course.id %>" method="post">
+              <input type="hidden" id="hidden" name="_method" value="delete">
+              <button type="submit"><ion-icon name="trash"></ion-icon></button>
+            </form>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</main>

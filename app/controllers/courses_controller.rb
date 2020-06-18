@@ -8,31 +8,27 @@ class CoursesController < ApplicationController
     erb :"courses/index"
   end
 
-  get '/courses/new' do
-    erb :"courses/new"
-  end
-
   post '/courses' do
-    @course = current_user.courses.create(params)
-    if @course.valid?
-      erb :"courses/show"
+    @course = current_user.courses.build(params)
+    if @course.save
+      redirect to '/courses'
     else 
       flash[:alerts] = @course.errors.full_messages
-      redirect to "/courses/new"
+      redirect to "/courses/index"
     end
   end
 
-  post '/courses/:id/classmates' do 
-    permission_required
+  # post '/courses/:id/classmates' do 
+  #   permission_required
 
-    @classmate = current_user.find_or_create_by(name: params[:name], birthday: params[:birthday])
+  #   @classmate = current_user.find_or_create_by(name: params[:name], birthday: params[:birthday])
 
-    flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
+  #   flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
 
-    ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
+  #   ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
     
-    redirect to "/courses/#{@course.id}"
-  end
+  #   redirect to "/courses/#{@course.id}"
+  # end
 
   get '/courses/:id' do
     permission_required

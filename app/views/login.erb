@@ -1,6 +1,5 @@
-<section class="login">
+<main>
   <form action="/login" method="post">
-
     <% if !!flash[:alerts] %>
       <div class="alert">
         <ul>
@@ -10,22 +9,17 @@
         </ul>
       </div>
     <% end %>
-
     <div>
       <label for="email">Email:</label> <br>
       <input type="email" name="email" />
     </div>
-
     <div>
       <label for="password">Password:</label> <br>
       <input type="password" name="password" />
     </div>
-
-    <br>
-
     <div>
       <input type="submit" value="Log in" class="btn btn-full">
     </div>
   
   </form>
-</section>
+</main>

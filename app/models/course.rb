@@ -4,4 +4,5 @@ class Course < ActiveRecord::Base
   has_many :classmates, :through => :classmate_courses
 
   validates :title, :presence=>true
+  validates :title, :uniqueness=>true
 end
