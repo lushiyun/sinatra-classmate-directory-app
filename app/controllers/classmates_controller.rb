@@ -3,20 +3,21 @@ class ClassmatesController < ApplicationController
     login_required
   end
 
+
   get '/classmates' do
     @classmates = current_user.classmates
     erb :"/classmates/index"
   end
 
-  get '/classmates/new' do
-    @courses = current_user.courses
-    erb :"/classmates/new"
-  end
+  # get '/classmates/new' do
+  #   @courses = current_user.courses
+  #   erb :"/classmates/new"
+  # end
 
-  post '/classmates' do
-    @classmate = current_user.classmates.create(params[:classmate])
-    create_or_update_classmate
-  end
+  # post '/classmates' do
+  #   @classmate = current_user.classmates.create(params[:classmate])
+  #   create_or_update_classmate
+  # end
 
   get '/classmates/:id' do
     permission_required

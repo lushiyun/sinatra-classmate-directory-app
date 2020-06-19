@@ -1,4 +1,4 @@
-<main class="course-edit">
+<main class="edit-new">
   <form action="/courses/<%= @course.id %>" method="POST">
     <input type="hidden" id="hidden" name="_method" value="patch">
     <% if !!flash[:alerts] %>

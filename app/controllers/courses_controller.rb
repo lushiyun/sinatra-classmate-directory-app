@@ -17,26 +17,9 @@ class CoursesController < ApplicationController
     redirect to "/courses"
   end
 
-  post '/courses/:id/classmates' do 
-    permission_required
-
-    @classmate = current_user.find_or_create_by(params[:classmate])
-
-    flash[:alerts] = @classmate.errors.full_messages unless @classmate.valid?
-
-    ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
-    
-    redirect to "/courses/#{@course.id}"
-  end
-
-  get '/courses/:id' do
-    permission_required
-    erb :"/courses/show"
-  end
-
   get '/courses/:id/edit' do
     permission_required
-    erb :"/courses/edit"
+    erb :"courses/edit"
   end
 
   patch '/courses/:id' do
@@ -55,6 +38,32 @@ class CoursesController < ApplicationController
     permission_required
     current_user.courses.destroy(@course)
     redirect to "/courses"
+  end
+
+  get '/courses/:id/classmates/new' do
+    permission_required
+    erb :"classmates/new"
+  end
+
+  post '/courses/:id/classmates' do 
+    permission_required
+    sanitize_input(params[:classmate])
+    @classmate = current_user.classmates.find_or_create_by(params[:classmate])
+
+    if @classmate.valid?
+      ClassmateCourse.create(course_id: @course.id, classmate_id: @classmate.id) unless @course.classmates.include?(@classmate)
+      redirect to "/courses/#{@course.id}"
+    else
+      flash[:alerts] = @classmate.errors.full_messages
+      redirect to "/courses/#{@course.id}/classmates/new"
+    end   
+  end
+
+  # INCOMPLETE
+
+  get '/courses/:id' do
+    permission_required
+    erb :"courses/show"
   end
 
   private

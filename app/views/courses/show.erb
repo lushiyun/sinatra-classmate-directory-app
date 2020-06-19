@@ -1,52 +1,38 @@
 <main>
   <h3><%= @course.title %></h3>
-  
-  <form class="new" action="/courses/<%= @course.id %>/classmates" method="POST">
-    <% if !!flash[:alerts] %>
-      <div class="alert">
-        <ul>
-          <% flash[:alerts].each do |alert| %>
-            <li><%= alert %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Birthday</th>
+        <th>Email</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @course.classmates.reverse.each do |classmate| %>
+        <tr>
+          <td><a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a></td>
+          <td><%= classmate.birthday %></td>
+          <td><%= classmate.email %></td>
+          <td><a href="/classmates/<%= classmate.id %>/ edit"><ion-icon name="create"></ion-icon></a></td>
+          <td>
+            <form class="delete" action="/classmates/<%=  classmate.id %>" method="post">
+                <input type="hidden" id="hidden"  name="_method" value="delete">
+                <button type="submit"><ion-icon   name="trash"></ion-icon></button>
+              </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+
     
-    <div>
-      <span>
-        <input type="text" name="classmate[name]" placeholder="Name">
-      </span>
-      <span>
-        <input type="date" name="classmate[birthday]" placeholder="Birthday">
-      </span>
-      <span>
-        <input type="email" name="classmate[email]" placeholder="Email">
-      </span>
-      <span>
-        <input type="submit" value="Add Course" class="btn btn-full">
-      </span>
-    </div> 
-  </form>
-
-  <ul>
-    <% @course.classmates.reverse.each do |classmate| %>
-      <li>
-        <span><%= classmate.name %></a></span>
-        <span><%= classmate.birthday %></span>
-        <span><%= classmates.email %></span>
-         <span>
-            <a href="/courses/<%= course.id %>/edit"><ion-icon name="create"></ion-icon></a>
-          </span>
-          <span>
-            <form class="delete" action="/courses/<%= course.id %>" method="post">
-              <input type="hidden" id="hidden" name="_method" value="delete">
-              <button type="submit"><ion-icon name="trash"></ion-icon></button>
-            </form>
-          </span>
-      </li>
-    <% end %> 
-  </ul>
-
+  </table>
 </main>
 
 <a href="/courses">Index</a>
+
+<tfoot>
+      <td><a href="/courses/<%= @course.id %>/classmates/new">Add Classmate</a></td>
+    </tfoot>

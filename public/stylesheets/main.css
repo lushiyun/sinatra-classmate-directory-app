@@ -65,7 +65,7 @@ h3 {
   font-size: 1.75rem;
 }
 
-/* Header */
+/* HEADER*/
 
 header .logo {
   font-family: 'Montserrat', sans-serif;
@@ -175,16 +175,16 @@ form.session {
   max-width: 360px;
 }
 
-main.course-edit form {
+main.edit-new form {
   max-width: 500px
 }
 
-main.course-edit div:last-child {
+main.edit-new div:last-child {
   display: flex;
-  align-items: start;
+  justify-content: start;
 }
 
-main.course-edit div:last-child span {
+main.edit-new div:last-child span {
   margin-right: 0.75rem;
 }
 
@@ -208,7 +208,52 @@ form input {
   list-style: none;
 }
 
-/* INDEX TABLE */
+/* TABLE */
+
+table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  min-width: 400px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
+}
+
+table thead tr {
+  background-color: #808080;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+table th,
+table td {
+  padding: 0.75rem 1rem;
+}
+
+table td:nth-last-child(2) {
+  padding-right: 0.15rem;
+}
+
+table td:last-child {
+  padding-left: 0.15rem;
+}
+
+table tbody tr {
+  border-bottom: 1px solid #808080;
+  background-color: rgba(255, 255, 255, .7);
+  transition: background-color 0.2s;
+}
+
+table tbody tr:hover {
+  background-color: #ffffff;
+}
+
+table tr:last-child {
+  border-bottom: 2px solid #808080;
+}
+
+/* INDEX */
 
 form.delete {
   border: none;
@@ -249,6 +294,8 @@ div.index {
   text-align: right;
 }
 
+table a:link,
+table a:visited,
 .index li a:link,
 .index li a:visited,
 form button:link,
@@ -257,6 +304,8 @@ form button:visited {
   transition: color 0.2s;
 }
 
+table a:hover,
+table a:active,
 .index li a:hover,
 .index li a:active,
 form button:hover,
@@ -283,7 +332,6 @@ form.new input {
 form.new span:last-child {
   margin-left: 1.25rem;
 }
-
 
 /* LINKS */
 
