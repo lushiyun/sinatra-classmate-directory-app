@@ -1,20 +1,27 @@
-<h3>Edit your course</h3>
-
-<form action="/courses/<%= @course.id %>" method="post">
-<input type="hidden" id="hidden" name="_method" value="patch">
-
-  <label for="course[title]">Title:</label>
-  <input type="text" name="course[title]" value="<%= @course.title %>">
-  <br>
-  <label for="course[professor]">Professor: </label>
-  <input type="text" name="course[professor]" value="<%= @course.professor %>">
-  <br>
-  <label for="course[teaching_assistant]">Teaching Assistant: </label>
-  <input type="text" name="course[teaching_assistant]" value="<%= @course.teaching_assistant %>">
-  <br>
-  <input type="submit" value="Edit">
-
-</form>
-
-<a href="/courses">Index</a>
-
+<main class="course-edit">
+  <form action="/courses/<%= @course.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+    <% if !!flash[:alerts] %>
+      <div class="alert">
+        <ul>
+          <% flash[:alerts].each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div>
+      <label for="title">Title:</label> <br>
+      <input type="text" name="course[title]" value="<%= @course.title %>"/>
+    </div>
+    <div>
+      <span>
+        <a class="btn btn-full" href="/courses">Back</a>
+      </span>
+      <span>
+        <input type="submit" value="Edit" class="btn btn-full">
+      </span>
+    </div>
+  
+  </form>
+</main>

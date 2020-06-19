@@ -9,14 +9,12 @@ class CoursesController < ApplicationController
   end
 
   post '/courses' do
-    #bug: error message is always "You don't have permission"
-    @course = current_user.courses.build(params)
-    if @course.save
-      redirect to '/courses'
-    else 
+    #bug: error message doesn't show
+    sanitize_input(params)
+    unless @course = current_user.courses.create(params)
       flash[:alerts] = @course.errors.full_messages
-      redirect to "/courses/index"
-    end
+    end 
+    redirect to "/courses"
   end
 
   post '/courses/:id/classmates' do 
@@ -43,11 +41,13 @@ class CoursesController < ApplicationController
 
   patch '/courses/:id' do
     permission_required
+    sanitize_input(params[:course])
+    
     if @course.update(params[:course])
-      redirect to "/courses/#{@course.id}"
+      redirect to "/courses"
     else 
-      flash[:alerts] = course.errors.full_messages
-      redirect to "/courses/#{course.id}/edit"
+      flash[:alerts] = @course.errors.full_messages
+      redirect to "/courses/#{@course.id}/edit"
     end
   end
 
@@ -60,7 +60,7 @@ class CoursesController < ApplicationController
   private
 
   def permission_required
-    unless @course = current_user.courses.find_by(id: params[:id])
+    unless @course = current_user.courses.find_by_id(params[:id])
       flash[:alerts] = ["You don't have permission"]
       redirect to "/courses"
     end 

@@ -161,18 +161,31 @@ footer ion-icon {
   margin-bottom: 1rem;
 }
 
-/* LOGIN AND SIGNUP */
+/* FORMS */
 
 form {
   background-color: #ffffff;
   margin: 0 auto 2rem;
+  width: auto;
   padding: 45px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
 }
 
-form {
+form.session {
   max-width: 360px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
+}
+
+main.course-edit form {
+  max-width: 500px
+}
+
+main.course-edit div:last-child {
+  display: flex;
+  align-items: start;
+}
+
+main.course-edit div:last-child span {
+  margin-right: 0.75rem;
 }
 
 form input {

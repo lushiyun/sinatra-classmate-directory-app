@@ -28,6 +28,10 @@ class ApplicationController < Sinatra::Base
         redirect to "/"
       end
     end
+
+    def sanitize_input(input_hash)
+      input_hash.transform_values! { |v| v.gsub(/[\<\>\/]/, "") }
+    end
   end
   
 end
