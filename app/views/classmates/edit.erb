@@ -1,37 +1,54 @@
-<h3>Edit your classmate</h3>
+<main class="edit-new">
+  <% if !!@course %>
+    <form action="/courses/<%= @course.id %>/classmates/<%= @classmate.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+  <% else %>
+    <form action="/classmates/<%= @classmate.id %>" method="POST">
+    <input type="hidden" id="hidden" name="_method" value="patch">
+  <% end %>
+      <% if !!flash[:alerts] %>
+        <div class="alert">
+          <ul>
+            <% flash[:alerts].each do |alert| %>
+              <li><%= alert %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-<form action="/classmates/<%= @classmate.id %>" method="post">
-<input type="hidden" id="hidden" name="_method" value="patch">
+      <div>
+        <label for="classmate[name]">Name:</label> <br>
+        <input type="text" name="classmate[name]" value="<%= @classmate.name %>"/>
+      </div>
+      <div>
+        <label for="classmate[birthday]">Birthday:</label> <br>
+        <input type="date" name="classmate[birthday]" value="<%= @classmate.birthday %>"/>
+      </div>
+      <div>
+        <label for="classmate[email]">Email:</label> <br>
+        <input type="email" name="classmate[email]" value="<%= @classmate.email %>"/>
+      </div>
 
-  <label for="classmate[name]">Name:</label>
-  <input type="text" name="classmate[name]" value="<%= @classmate.name %>">
-  <br>
-  <label for="classmate[birthday]">Birthday: </label>
-  <input type="date" name="classmate[birthday]" value="<%= @classmate.birthday %>">
+      <label for="course_ids[]">Courses:</label>
+      <div class="course-selection">
+        <% @courses.reverse.each do |course| %>
+          <div class="checkbox">
+            <input type="checkbox" name="course_ids[]" value="<%= course.id %>" <%= 'checked' if @classmate.courses.include?(course) %>><span><%= course.title %></span><br>
+          </div>
+        <% end %> 
+      </div>
 
-  <p>
-    Edit courses you have together
-    <% @courses.each do |course| %>
-      <input type="checkbox" name="classmate[course_ids][]" value="<%= course.id %>" <%= 'checked' if @classmate.courses.include?(course) %>><%= course.title %><br>
-    <% end %>
-  </p>
-
-  <p>
-    Add a new course
-    <label for="course[title]">Name: </label>
-    <input type="text" name="course[title]">
-
-    <label for="course[professor]">Professor: </label>
-    <input type="text" name="course[professor]">
-
-    <label for="course[teaching_assistant]">Teaching Assistant: </label>
-    <input type="text" name="course[teaching_assistant]">
-  </p>
-
-  <br>
-
-  <input type="submit" value="Edit">
-
-</form>
-
-<a href="/classmates">Index</a>
+      <div>
+        <span>
+          <% if !!@course %>
+            <a class="btn btn-full" href="/courses/<%= @course.id %>">Back</a>
+          <% else %>
+            <a class="btn btn-full" href="/classmates/<%= @classmate.id %>">Back</a>
+          <% end %>
+        </span>
+        <span>
+          <input type="submit" value="Edit Classmate" class="btn btn-full">
+        </span>
+      </div>
+    </form>
+</main>

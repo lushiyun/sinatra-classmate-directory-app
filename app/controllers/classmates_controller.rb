@@ -3,21 +3,19 @@ class ClassmatesController < ApplicationController
     login_required
   end
 
-
   get '/classmates' do
     @classmates = current_user.classmates
     erb :"/classmates/index"
   end
 
-  # get '/classmates/new' do
-  #   @courses = current_user.courses
-  #   erb :"/classmates/new"
-  # end
+  get '/classmates/new' do
+    @courses = current_user.courses
+    erb :"/classmates/new"
+  end
 
-  # post '/classmates' do
-  #   @classmate = current_user.classmates.create(params[:classmate])
-  #   create_or_update_classmate
-  # end
+  post '/classmates' do
+    create_classmate("/classmates", "/classmates/new")
+  end
 
   get '/classmates/:id' do
     permission_required
@@ -32,8 +30,7 @@ class ClassmatesController < ApplicationController
 
   patch '/classmates/:id' do
     permission_required
-    @classmate.update(params[:classmate])
-    create_or_update_classmate
+    update_classmate("/classmates/#{@classmate.id}", "/classmates/#{@classmate.id}/edit")
   end
 
   delete '/classmates/:id' do
@@ -45,23 +42,10 @@ class ClassmatesController < ApplicationController
   private
 
   def permission_required
-    unless @classmate = current_user.classmates.find_by(id: params[:id])
+    unless @classmate = current_user.classmates.find_by_id(params[:id])
       flash[:alerts] = ["You don't have permission"]
       redirect to "/classmates"
     end
-  end
-
-  def create_or_update_classmate
-    unless @classmate.valid?
-      flash[:alerts] = @classmate.errors.full_messages
-    end
-
-    unless params[:course][:title].empty?
-      course = current_user.courses.find_or_create_by(params[:course])
-      ClassmateCourse.create(course_id: course.id, classmate_id: @classmate.id)
-    end
-    
-    redirect to "/classmates/#{@classmate.id}"
   end
 
 end

@@ -65,6 +65,14 @@ h3 {
   font-size: 1.75rem;
 }
 
+h4 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 /* HEADER*/
 
 header .logo {
@@ -163,12 +171,36 @@ footer ion-icon {
 
 /* FORMS */
 
-form {
+form,
+.profile-card {
   background-color: #ffffff;
   margin: 0 auto 2rem;
   width: auto;
   padding: 45px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
+}
+
+form div.checkbox {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  margin-bottom: 0.75rem;
+}
+
+form div.course-selection {
+  background-color: #f2f2f2;
+  padding: 0.5rem;
+  margin: 0 0 1rem;
+}
+
+form div.checkbox input {
+  vertical-align: middle;
+  width: 10%;
+  margin: 0;
+}
+
+form div.checkbox span {
+  width: 90%;
 }
 
 form.session {
@@ -213,10 +245,8 @@ form input {
 table {
   border-collapse: collapse;
   margin: 0 auto;
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   min-width: 400px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgb(0, 0, 0, 0.24);
 }
 
 table thead tr {
@@ -231,11 +261,11 @@ table td {
   padding: 0.75rem 1rem;
 }
 
-table td:nth-last-child(2) {
+tbody td:nth-last-child(2) {
   padding-right: 0.15rem;
 }
 
-table td:last-child {
+table tbody td:last-child {
   padding-left: 0.15rem;
 }
 
@@ -249,7 +279,7 @@ table tbody tr:hover {
   background-color: #ffffff;
 }
 
-table tr:last-child {
+table tbody tr:last-child {
   border-bottom: 2px solid #808080;
 }
 
@@ -387,4 +417,94 @@ input[type=submit]:active {
   border: 1px solid #000000;
   color: #ffffff;
   cursor: pointer;
+}
+
+/* CLASSMATE SHOW */
+
+main.classmate-show {
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+@media screen and (max-width: 600px) {
+  main.classmate-show { display: block; }
+}
+
+.profile-card {
+  height: fit-content;
+}
+
+@media screen and (max-width: 600px) {
+  .profile-card { width: 80vw; }
+}
+
+.profile-card div {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.profile-card div:first-child {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.profile-card div:last-child {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  float: right;
+}
+
+.classmate-show a:link,
+.classmate-show a:visited {
+  transition: color 0.2s;
+}
+
+.classmate-show a:hover,
+.classmate-show a:active {
+  color: #E6AF01;
+  cursor: pointer;
+}
+
+.profile-card a span {
+  vertical-align: middle;
+}
+
+.courses-right {
+  margin: 0 auto;
+  width: 80%;
+  font-size: 0.9rem;
+}
+
+.courses-right p {
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #808080;
+  padding: 0.75rem 1rem;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
+
+.courses-right ul {
+  position: relative;
+  background-color: #ffffff;
+}
+
+.courses-right ul li {
+  list-style: none;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s;
+}
+
+.courses-right ul li:hover {
+  transform: scale(1.05);
+  z-index: 100;
+  background-color: #808080;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  color: #ffffff;
 }

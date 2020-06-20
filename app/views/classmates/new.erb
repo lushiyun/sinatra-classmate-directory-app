@@ -1,36 +1,56 @@
 <main class="edit-new">
-  <form action="/courses/<%= @course.id %>/classmates" method="POST">
-    <% if !!flash[:alerts] %>
-      <div class="alert">
-        <ul>
-          <% flash[:alerts].each do |alert| %>
-            <li><%= alert %></li>
-          <% end %>
-        </ul>
+  <% if !!@course %>
+    <form action="/courses/<%= @course.id %>/classmates" method="POST">
+  <% else %>
+    <form action="/classmates" method="POST">
+  <% end %>
+      <% if !!flash[:alerts] %>
+        <div class="alert">
+          <ul>
+            <% flash[:alerts].each do |alert| %>
+              <li><%= alert %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div>
+        <label for="classmate[name]">Name:</label> <br>
+        <input type="text" name="classmate[name]"/>
       </div>
-    <% end %>
+      <div>
+        <label for="classmate[birthday]">Birthday:</label> <br>
+        <input type="date" name="classmate[birthday]"/>
+      </div>
+      <div>
+        <label for="classmate[email]">Email:</label> <br>
+        <input type="email" name="classmate[email]"/>
+      </div>
 
-    <div>
-      <label for="classmate[name]">Name:</label> <br>
-      <input type="text" name="classmate[name]"/>
-    </div>
-    <div>
-      <label for="classmate[birthday]">Birthday:</label> <br>
-      <input type="date" name="classmate[birthday]"/>
-    </div>
-    <div>
-      <label for="classmate[email]">Email:</label> <br>
-      <input type="email" name="classmate[email]"/>
-    </div>
+      <label for="course[:id]">Courses:</label>
+      <div class="course-selection">
+        <% @courses.reverse.each do |course| %>
+          <div class="checkbox">
+            <% if !!@course %>
+              <input type="checkbox" name="course_ids[]" value="<%= course.id %>" <%= 'checked' if course.id == @course.id %>><span><%= course.title %></span><br>
+            <% else %>
+              <input type="checkbox" name="course_ids[]" value="<%= course.id %>"><span><%= course.title %></span><br>
+            <% end %>
+          </div>
+        <% end %> 
+      </div>
 
-    <div>
-      <span>
-        <a class="btn btn-full" href="/courses/<%= @course.id %>">Back</a>
-      </span>
-      <span>
-        <input type="submit" value="Add Classmate" class="btn btn-full">
-      </span>
-    </div>
-  
-  </form>
+      <div>
+        <span>
+          <% if !!@course %>
+            <a class="btn btn-full" href="/courses/<%= @course.id %>">Back</a>
+          <% else %>
+            <a class="btn btn-full" href="/classmates">Back</a>
+          <% end %>
+        </span>
+        <span>
+          <input type="submit" value="Add Classmate" class="btn btn-full">
+        </span>
+      </div>
+    </form>
 </main>

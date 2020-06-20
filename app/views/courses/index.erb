@@ -30,7 +30,7 @@
             <a href="/courses/<%= course.id %>/edit"><ion-icon name="create"></ion-icon></a>
           </span>
           <span>
-            <form class="delete" action="/courses/<%= course.id %>" method="post">
+            <form class="delete" action="/courses/<%= course.id %>" method="POST">
               <input type="hidden" id="hidden" name="_method" value="delete">
               <button type="submit"><ion-icon name="trash"></ion-icon></button>
             </form>

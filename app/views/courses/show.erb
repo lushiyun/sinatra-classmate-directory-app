@@ -1,5 +1,5 @@
 <main>
-  <h3><%= @course.title %></h3>
+  <h4><%= @course.title %></h4>
   <table>
     <thead>
       <tr>
@@ -13,26 +13,23 @@
     <tbody>
       <% @course.classmates.reverse.each do |classmate| %>
         <tr>
-          <td><a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a></td>
+          <td><a href="/courses/<%= @course.id %>/classmates/<%= classmate.id %>/edit"><%= classmate.name %></a></td>
           <td><%= classmate.birthday %></td>
           <td><%= classmate.email %></td>
-          <td><a href="/classmates/<%= classmate.id %>/ edit"><ion-icon name="create"></ion-icon></a></td>
+          <td><a href="/courses/<%= @course.id %>/classmates/<%= classmate.id %>/edit"><ion-icon name="create"></ion-icon></a></td>
           <td>
-            <form class="delete" action="/classmates/<%=  classmate.id %>" method="post">
-                <input type="hidden" id="hidden"  name="_method" value="delete">
-                <button type="submit"><ion-icon   name="trash"></ion-icon></button>
+            <form class="delete" action="/courses/<%= @course.id %>/classmates/<%= classmate.id %>" method="POST">
+                <input type="hidden" id="hidden" name="_method" value="delete">
+                <button type="submit"><ion-icon name="trash"></ion-icon></button>
               </form>
           </td>
         </tr>
       <% end %>
     </tbody>
-
-    
+    <tfoot>
+      <tr>
+        <td><a class="btn btn-full" href="/courses/<%= @course.id %>/classmates/new">Add Classmate</a></td>
+      </tr>
+    </tfoot>
   </table>
 </main>
-
-<a href="/courses">Index</a>
-
-<tfoot>
-      <td><a href="/courses/<%= @course.id %>/classmates/new">Add Classmate</a></td>
-    </tfoot>

@@ -1,19 +1,34 @@
-<h3><%= @classmate.name %></h3>
-<p>Birthday: <%= @classmate.birthday %></p>
+<main class="classmate-show">
+  <div class="profile-card">
+    <div><%= @classmate.name %></div>
 
-<h4>Courses you have together:</h4>
+    <div>
+      <span><ion-icon name="calendar"></ion-icon></span>
+      <span><%= @classmate.birthday %></span>
+    </div>
 
-<ul>
-  <% @classmate.courses.each do |course| %>
-    <li><a href="/courses/<%= course.id %>"><%= course.title %></a></li> 
-  <% end %>
-</ul>
+    <div>
+      <a href="mailto:<%= @classmate.email %>">
+        <span><ion-icon name="mail"></ion-icon></span>
+        <span><%= @classmate.email %></span>
+      </a>
+    </div>
 
-  <br>
+    <div>
+      <a href="/classmates/<%= @classmate.id %>/edit"><ion-icon name="create-outline"></ion-icon></a>
+      <form class="delete" action="/classmates/<%= @classmate.id %>" method="POST">
+      <input type="hidden" id="hidden" name="_method" value="delete">
+        <button type="submit"><ion-icon name="trash-outline"></ion-icon></button>
+      </form>
+    </div>
+  </div>
 
-<a href="/classmates/<%= @classmate.id %>/edit">Edit</a> <a href="/classmates">Index</a>
-
-<form action="/classmates/<%= @classmate.id %>" method="post">
-  <input type="hidden" id="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete">
-</form>
+  <div class="courses-right">
+    <p>Courses you have together:</p>
+    <ul>
+      <% @classmate.courses.each do |course| %>
+        <a href="/courses/<%= course.id %>"><li><%= course.title %></li></a> 
+      <% end %>
+    </ul>
+  </div>
+</main>

@@ -1,9 +1,35 @@
-<ul>
-    <% @classmates.each do |classmate| %>
-    <li>
-      <a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a>
-    </li>
-    <% end %> 
-</ul>
+<main>
+  <h4>Classmate Listing</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Birthday</th>
+        <th>Email</th>
+        <th colspan="2"></th>
+      </tr>
+    </thead>
 
-<a href="/classmates/new">Add</a>
+    <tbody>
+      <% current_user.classmates.reverse.each do |classmate| %>
+        <tr>
+          <td><a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a></td>
+          <td><%= classmate.birthday %></td>
+          <td><%= classmate.email %></td>
+          <td><a href="/classmates/<%= classmate.id %>/edit"><ion-icon name="create"></ion-icon></a></td>
+          <td>
+            <form class="delete" action="/classmates/<%=  classmate.id %>" method="POST">
+                <input type="hidden" id="hidden"  name="_method" value="delete">
+                <button type="submit"><ion-icon   name="trash"></ion-icon></button>
+              </form>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><a class="btn btn-full" href="/classmates/new">Add Classmate</a></td>
+      </tr>
+    </tfoot>
+  </table>
+</main>
