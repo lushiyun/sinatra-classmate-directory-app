@@ -64,6 +64,7 @@ class CoursesController < ApplicationController
 
   patch '/courses/:course_id/classmates/:classmate_id' do
     permission_required(params[:course_id])
+    @classmate = current_user.classmates.find_by_id(params[:classmate_id])
     update_classmate("/courses/#{@course.id}", "/courses/#{@course.id}/classmates/#{@classmate.id}/edit")
   end
 

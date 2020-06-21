@@ -13,7 +13,7 @@
     <tbody>
       <% @course.classmates.reverse.each do |classmate| %>
         <tr>
-          <td><a href="/courses/<%= @course.id %>/classmates/<%= classmate.id %>/edit"><%= classmate.name %></a></td>
+          <td><a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a></td>
           <td><%= classmate.birthday %></td>
           <td><%= classmate.email %></td>
           <td><a href="/courses/<%= @course.id %>/classmates/<%= classmate.id %>/edit"><ion-icon name="create"></ion-icon></a></td>

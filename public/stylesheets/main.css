@@ -473,9 +473,14 @@ main.classmate-show {
 }
 
 .courses-right {
-  margin: 0 auto;
+  margin-top: 0;
+  margin-left: 0;
   width: 80%;
   font-size: 0.9rem;
+}
+
+@media screen and (max-width: 600px) {
+  .courses-right { margin: 0 auto; }
 }
 
 .courses-right p {

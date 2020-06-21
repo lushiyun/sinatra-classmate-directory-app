@@ -49,7 +49,6 @@ class ApplicationController < Sinatra::Base
 
     def update_classmate(success_route, fail_route)
       sanitize_input(params[:classmate])
-      @classmate = current_user.classmates.find_by_id(params[:id])
       if @classmate.update(params[:classmate])
         course_array = Course.find(params[:course_ids])
         @classmate.courses.replace(course_array)

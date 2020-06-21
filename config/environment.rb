@@ -12,7 +12,6 @@ database_config = {
   }
 }
 
-# ActiveRecord::Base.establish_connection(development_database_config)
 set :database, database_config
 
 require 'rack-flash'
