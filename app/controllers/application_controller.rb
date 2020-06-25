@@ -35,17 +35,25 @@ class ApplicationController < Sinatra::Base
       end
     end
 
-    def sanitize_input(input_hash)
-      input_hash.transform_values! { |v| v.gsub(/[\<\>\/]/, "") }
+    def sanitize_input
+      params.each_with_object({}) do |(k, v), new|
+        if v.is_a? String
+          new[k] = v.gsub(/[\<\>\/]/, "")
+        elsif v.is_a? Array
+          sanitized_array = v.map! { |arr_v| arr_v.gsub(/[\<\>\/]/, "") }
+          new[k] = sanitized_array
+        else
+          sanitized_hash = v.transform_values! { |hash_v| hash_v.gsub(/[\<\>\/]/, "") }
+          new[k] = sanitized_hash
+        end
+      end
     end
 
     def create_classmate(success_route, fail_route)
-      sanitize_input(params[:classmate])
-      @classmate = current_user.classmates.find_or_create_by(params[:classmate])
+      sanitize_input
+      @classmate = current_user.classmates.find_or_create_by(params[:classmate]) 
       if @classmate.valid?
-        params[:course_ids].each do |course_id|
-          ClassmateCourse.create(course_id: course_id, classmate_id: @classmate.id) unless Course.find(course_id).classmates.include?(@classmate)
-        end
+        @classmate.course_ids = params[:course_ids]
         redirect to success_route
       else
         flash[:alerts] = @classmate.errors.full_messages
@@ -54,11 +62,10 @@ class ApplicationController < Sinatra::Base
     end
 
     def update_classmate(success_route, fail_route)
-      sanitize_input(params[:classmate])
+      sanitize_input
       if @classmate.update(params[:classmate])
-        course_array = Course.find(params[:course_ids])
-        @classmate.courses.replace(course_array)
-      redirect to success_route
+        @classmate.course_ids = params[:course_ids]
+        redirect to success_route
       else
         flash[:alerts] = @classmate.errors.full_messages
         redirect to fail_route

@@ -1,4 +1,13 @@
 <main>
+  <% if !!flash[:alerts] %>
+    <div class="alert">
+      <ul>
+        <% flash[:alerts].each do |alert| %>
+          <li><%= alert %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
   <h4>Classmate Listing</h4>
   <table>
     <thead>
