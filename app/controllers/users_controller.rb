@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    sanitize_input(params)
+    sanitize_input
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   post '/signup' do
-    sanitize_input(params)
+    sanitize_input
     user = User.new(params)
     if user.save
       session[:user_id] = user.id

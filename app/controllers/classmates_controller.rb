@@ -4,7 +4,7 @@ class ClassmatesController < ApplicationController
   end
 
   get '/classmates' do
-    @classmates = current_user.classmates
+    @classmates = current_user.classmates.search(params[:query])
     erb :"/classmates/index"
   end
 

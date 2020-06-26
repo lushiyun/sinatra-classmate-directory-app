@@ -5,4 +5,13 @@ class Classmate < ActiveRecord::Base
   
   validates :name, :presence=>true
   validates :name, uniqueness: { scope: :user }
+
+  def self.search(query)
+    if !!query
+      self.where("name LIKE ?", "%#{query}%")
+    else 
+      self.all
+    end
+  end
+
 end

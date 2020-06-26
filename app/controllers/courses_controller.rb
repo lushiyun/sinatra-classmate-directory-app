@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   end
 
   get '/courses' do
-    @courses = current_user.courses
+    @courses = current_user.courses.search(params[:query])
     erb :"courses/index"
   end
 

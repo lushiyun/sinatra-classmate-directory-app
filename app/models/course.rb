@@ -6,5 +6,12 @@ class Course < ActiveRecord::Base
   validates :title, :presence=>true
   validates :title, uniqueness: { scope: :user }
 
-  
+  def self.search(query)
+    if !!query
+      self.where("title LIKE ?", "%#{query}%")
+    else 
+      self.all
+    end
+  end
+
 end

@@ -229,6 +229,43 @@ form input {
   margin: 0 0 15px;
 }
 
+form.search-box,
+form.search-box input,
+form.search-box button {
+  all: unset;
+}
+
+.search-wrapper {
+  width: 100%;
+  height: 12vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+form.search-box {
+  width: 30%;
+  position: relative;
+}
+
+form.search-box input[type="text"] {
+  width: 100%;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 1.5px solid #ffffff;
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+form.search-box button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 10px;
+  color: #ffffff;
+}
+
 .alert {
   padding: 0.75rem;
   background-color: #f44336;
@@ -322,6 +359,26 @@ div.index {
 
 .index span:nth-child(n+2) {
   text-align: right;
+}
+
+.header-wrapper {
+  margin: 0 auto;
+  width: 80vw;
+  display: flex;
+  justify-content: space-between;
+}
+
+.header-wrapper div.search-wrapper form {
+  display: block;
+  width: 100%;
+}
+
+.header-wrapper div.search-wrapper form:first-child {
+  margin-right: 10px;
+}
+
+.header-wrapper div.search-wrapper form:last-child {
+  margin-left: 10px;
 }
 
 table a:link,

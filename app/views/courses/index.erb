@@ -1,23 +1,29 @@
 <main>
-  <form class="new" action="/courses" method="POST">
-    <% if !!flash[:alerts] %>
-      <div class="alert">
-        <ul>
-          <% flash[:alerts].each do |alert| %>
-            <li><%= alert %></li>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <div>
-      <span>
-        <input type="text" name="title" placeholder="Course Title">
-      </span>
-      <span>
-        <input type="submit" value="Add Course" class="btn btn-full">
-      </span>
-    </div> 
-  </form>
+  <% if !!flash[:alerts] %>
+    <div class="alert">
+      <ul>
+        <% flash[:alerts].each do |alert| %>
+          <li><%= alert %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="header-wrapper">
+    <div class="search-wrapper">
+      <form class="search-box" action="/courses" method="POST">
+        <input type="text" name="title" placeholder="Add course">
+        <button type="submit"><ion-icon name="add-circle-outline"></ion-icon></button>
+      </form>
+    </div>
+    
+    <div class="search-wrapper">
+      <form class="search-box" action="/courses" method="GET">
+        <input type="text" name="query" placeholder="Search course title">
+        <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+      </form>
+    </div>
+  </div>
 
   <div class="index">
     <ul>

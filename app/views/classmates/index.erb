@@ -1,4 +1,5 @@
 <main>
+
   <% if !!flash[:alerts] %>
     <div class="alert">
       <ul>
@@ -8,7 +9,14 @@
       </ul>
     </div>
   <% end %>
-  <h4>Classmate Listing</h4>
+
+  <div class="search-wrapper">
+    <form class="search-box" action="/classmates" method="GET">
+      <input type="text" name="query" placeholder="Search student name">
+      <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+    </form>
+  </div>
+
   <table>
     <thead>
       <tr>
@@ -20,7 +28,7 @@
     </thead>
 
     <tbody>
-      <% current_user.classmates.reverse.each do |classmate| %>
+      <% @classmates.reverse.each do |classmate| %>
         <tr>
           <td><a href="/classmates/<%= classmate.id %>"><%= classmate.name %></a></td>
           <td><%= classmate.birthday %></td>
@@ -28,8 +36,8 @@
           <td><a href="/classmates/<%= classmate.id %>/edit"><ion-icon name="create"></ion-icon></a></td>
           <td>
             <form class="delete" action="/classmates/<%=  classmate.id %>" method="POST">
-                <input type="hidden" id="hidden"  name="_method" value="delete">
-                <button type="submit"><ion-icon   name="trash"></ion-icon></button>
+                <input type="hidden" id="hidden" name="_method" value="delete">
+                <button type="submit"><ion-icon name="trash"></ion-icon></button>
               </form>
           </td>
         </tr>
