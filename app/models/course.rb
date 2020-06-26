@@ -5,4 +5,6 @@ class Course < ActiveRecord::Base
 
   validates :title, :presence=>true
   validates :title, uniqueness: { scope: :user }
+
+  
 end

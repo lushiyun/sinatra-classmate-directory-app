@@ -1,4 +1,15 @@
 <main class="classmate-show">
+
+  <% if !!flash[:alerts] %>
+    <div class="alert">
+      <ul>
+        <% flash[:alerts].each do |alert| %>
+          <li><%= alert %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="profile-card">
     <div><%= @classmate.name %></div>
 
