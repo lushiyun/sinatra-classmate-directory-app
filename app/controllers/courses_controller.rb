@@ -59,9 +59,13 @@ class CoursesController < ApplicationController
   get '/courses/:course_id/classmates/:classmate_id/edit' do
     course_permission_required(params[:course_id])
     classmate_permission_required(params[:classmate_id])
-    @courses = current_user.courses
-    @classmate = current_user.classmates.find(params[:classmate_id])
-    erb :"classmates/edit"
+    if @course.classmates.include?(@classmate)
+      @courses = current_user.courses
+      erb :"classmates/edit"
+    else
+      flash[:alerts] = ["Course doesn't have this classmate"]
+      redirect to "/courses/#{@course.id}"
+    end
   end
 
   patch '/courses/:course_id/classmates/:classmate_id' do

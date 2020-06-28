@@ -1,5 +1,16 @@
 <main>
   <h4><%= @course.title %></h4>
+
+  <% if !!flash[:alerts] %>
+    <div class="alert">
+      <ul>
+        <% flash[:alerts].each do |alert| %>            
+          <li><%= alert %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <table>
     <thead>
       <tr>

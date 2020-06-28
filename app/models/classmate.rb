@@ -4,7 +4,7 @@ class Classmate < ActiveRecord::Base
   has_many :courses, :through => :classmate_courses
   
   validates :name, :presence=>true
-  validates :name, uniqueness: { scope: :user }
+  # validates :name, uniqueness: { scope: :user }
 
   def self.search(query)
     if !!query
