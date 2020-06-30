@@ -4,7 +4,7 @@ require 'bundler/setup'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 Dotenv.load if ENV['SINATRA_ENV'] == 'development'
 
-set :environment, ENV['SINATRA_ENV'].to_sym
+# set :environment, ENV['SINATRA_ENV'].to_sym
 
 # database_config = {
 #   :development => {
