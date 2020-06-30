@@ -10,6 +10,7 @@ gem 'puma'
 gem 'bcrypt'
 gem 'dotenv'
 gem 'foreman'
+gem 'rails_12factor'
 
 group :development do
   gem 'tux'

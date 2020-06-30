@@ -40,6 +40,11 @@ GEM
       rack
     rack-test (0.6.3)
       rack (>= 1.0)
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     rake (13.0.1)
     require_all (3.0.0)
     ripl (0.7.1)
@@ -86,6 +91,7 @@ DEPENDENCIES
   pry
   puma
   rack-flash3
+  rails_12factor
   rake
   require_all
   shotgun
